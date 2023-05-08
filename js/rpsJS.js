@@ -2,7 +2,7 @@ function getRandomNumber(){
     return Math.floor(Math.random() * 3);
 }
 
-let cpuChoice = () => {
+function cpuChoice(){
     let choice = getRandomNumber();
     if(choice === 0){
         return "ROCK";
@@ -24,7 +24,7 @@ function playerSelection(){
 
 let playRound = (player, cpu) => {
     if(player === cpu){
-        return `TIE: both picked ${player}`;
+        return `YOU TIED: both picked ${player}`;
     }
     else if((player == "ROCK" && cpu == "SCISSORS") || (player == "PAPER" && cpu == "ROCK") || (player == "SCISSORS" && cpu == "PAPER")){
         return `YOU WIN: ${player} beats ${cpu}`;
@@ -32,5 +32,35 @@ let playRound = (player, cpu) => {
     return `YOU LOSE: ${player} loses to ${cpu}`;
 }
 
- let round = playRound(playerSelection(), cpuChoice());
- console.log(round);
+let playGame = () => {
+    let round = "";
+    let tied = 0;
+    let wins = 0;
+    let loss = 0;
+    for(let i = 0; i < 5; i++){
+        round = playRound(playerSelection(), cpuChoice());
+        console.log(round);
+        if(round.charAt(4) == "T"){
+            tied++;
+        }else if(round.charAt(4) == "W"){
+            wins++;
+        }else{
+            loss++;
+        }
+    }
+    determineWinner(tied, wins, loss);
+}
+
+function determineWinner(tie, win, loss){
+    if(win > loss){
+        console.log(`You win; ties: ${tie}, wins: ${win}, loss: ${loss}`);
+    }
+    else if(win == loss){
+        console.log(`You tied; t: ${tie}, wins: ${win}, loss: ${loss}`);
+    }
+    else{
+        console.log(`You lose; t: ${tie}, wins: ${win}, loss: ${loss}`);
+    }
+}
+
+playGame();
