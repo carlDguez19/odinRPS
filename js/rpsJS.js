@@ -17,19 +17,19 @@ let playRound = (player, cpu) => {
     if(player === cpu){
         ties++;
         outcomeP.textContent = "";
-        outcomeP.textContent = `YOU TIED: both picked ${player}`;
+        outcomeP.textContent = `YOU TIED: both picked ${player}\r\n carlos`;
         return `YOU TIED: both picked ${player}`;
     }
     else if((player == "ROCK" && cpu == "SCISSORS") || (player == "PAPER" && cpu == "ROCK") || (player == "SCISSORS" && cpu == "PAPER")){
         wins++;
         outcomeP.textContent = "";
-        outcomeP.textContent = `YOU WIN: ${player} beats ${cpu}`;
+        outcomeP.textContent = `YOU WIN: ${player} beats ${cpu}\r\n playaplaya`;
         return `YOU WIN: ${player} beats ${cpu}`;
     }
     else{
         losses++;
         outcomeP.textContent = "";
-        outcomeP.textContent = `YOU LOSE: ${player} loses to ${cpu}`;
+        outcomeP.textContent = `YOU LOSE: ${player} loses to ${cpu}\r\n badBunny`;
         return `YOU LOSE: ${player} loses to ${cpu}`;
     }
 }
@@ -51,6 +51,7 @@ let losses = 0;
 let ties = 0;
 
 const outcomeP = document.querySelector('.outcome');
+const score = document.querySelector('.score');
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
