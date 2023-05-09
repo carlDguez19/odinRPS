@@ -15,12 +15,23 @@ function cpuChoice(){
 
 let playRound = (player, cpu) => {
     if(player === cpu){
+        ties++;
+        outcomeP.textContent = "";
+        outcomeP.textContent = `YOU TIED: both picked ${player}`;
         return `YOU TIED: both picked ${player}`;
     }
     else if((player == "ROCK" && cpu == "SCISSORS") || (player == "PAPER" && cpu == "ROCK") || (player == "SCISSORS" && cpu == "PAPER")){
+        wins++;
+        outcomeP.textContent = "";
+        outcomeP.textContent = `YOU WIN: ${player} beats ${cpu}`;
         return `YOU WIN: ${player} beats ${cpu}`;
     }
-    return `YOU LOSE: ${player} loses to ${cpu}`;
+    else{
+        losses++;
+        outcomeP.textContent = "";
+        outcomeP.textContent = `YOU LOSE: ${player} loses to ${cpu}`;
+        return `YOU LOSE: ${player} loses to ${cpu}`;
+    }
 }
 
 function determineWinner(tie, win, loss){
@@ -35,11 +46,16 @@ function determineWinner(tie, win, loss){
     }
 }
 
+let wins = 0;
+let losses = 0;
+let ties = 0;
+
+const outcomeP = document.querySelector('.outcome');
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
     button.addEventListener('click', () =>{
-        let result = playRound(button.getAttribute('class'), cpuChoice);
+        playRound(button.getAttribute('class').toUpperCase(), cpuChoice()); //clever ??? i get the class atribute from each button and uppecase it and use it as the param for play round player side (smiley side eye)
         console.log(result);
     });
 });
