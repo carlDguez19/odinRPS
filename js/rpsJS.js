@@ -13,15 +13,6 @@ function cpuChoice(){
     return "SCISSORS";
 }
 
-function playerSelection(){
-    let choice = prompt("Enter choice:");
-    choice = choice.toUpperCase();
-    if(choice == "SCISSOR"){
-        choice = "SCISSORS";
-    }
-    return choice;
-}
-
 let playRound = (player, cpu) => {
     if(player === cpu){
         return `YOU TIED: both picked ${player}`;
@@ -30,25 +21,6 @@ let playRound = (player, cpu) => {
         return `YOU WIN: ${player} beats ${cpu}`;
     }
     return `YOU LOSE: ${player} loses to ${cpu}`;
-}
-
-let playGame = () => {
-    let round = "";
-    let tied = 0;
-    let wins = 0;
-    let loss = 0;
-    for(let i = 0; i < 5; i++){
-        round = playRound(playerSelection(), cpuChoice());
-        console.log(round);
-        if(round.charAt(4) == "T"){
-            tied++;
-        }else if(round.charAt(4) == "W"){
-            wins++;
-        }else{
-            loss++;
-        }
-    }
-    determineWinner(tied, wins, loss);
 }
 
 function determineWinner(tie, win, loss){
@@ -63,4 +35,40 @@ function determineWinner(tie, win, loss){
     }
 }
 
-playGame();
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () =>{
+        let result = playRound(button.getAttribute('class'), cpuChoice);
+        console.log(result);
+    });
+});
+// function playerSelection(){
+//     let choice = prompt("Enter choice:");
+//     choice = choice.toUpperCase();
+//     if(choice == "SCISSOR"){
+//         choice = "SCISSORS";
+//     }
+//     return choice;
+// }
+
+// let playGame = () => {
+//     let round = "";
+//     let tied = 0;
+//     let wins = 0;
+//     let loss = 0;
+//     for(let i = 0; i < 5; i++){
+//         round = playRound(playerSelection(), cpuChoice());
+//         console.log(round);
+//         if(round.charAt(4) == "T"){
+//             tied++;
+//         }else if(round.charAt(4) == "W"){
+//             wins++;
+//         }else{
+//             loss++;
+//         }
+//     }
+//     determineWinner(tied, wins, loss);
+// }
+
+// playGame();
