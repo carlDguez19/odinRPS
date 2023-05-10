@@ -36,18 +36,18 @@ let playRound = (player, cpu) => {
     }
 }
 
-function announceWinner(winner){
-    const gameArea = document.querySelector('.gameArea');
-    const buttonArea = document.querySelector('.buttonArea');
-    const results = document.querySelector('.results');
-    gameArea.removeChild(buttonArea);
-    const winnerArea = document.createElement('div');
-    const winnerText = document.createElement('p');
-    winnerText.textContent = `${winner} WINS!!`;
-    winnerArea.classList.add('winnerArea');
-    winnerText.classList.add('winner');
-    winnerArea.appendChild(winnerText);
-    gameArea.insertBefore(winnerArea, results);
+function announceWinner(winner){//i will explain this section thoroughly since it can seem very intimidating but actuall is not
+    const gameArea = document.querySelector('.gameArea');//selected gameArea to be able to append the new div to it at the end
+    const buttonArea = document.querySelector('.buttonArea');//this was selected to be able to remove it
+    const results = document.querySelector('.results');//this was selected to be used as a reference node to add the created div/p
+    gameArea.removeChild(buttonArea);//removed button area so game cannot be played
+    const winnerArea = document.createElement('div');//created the new div where winner will be displayed
+    const winnerText = document.createElement('p');//created p where text will be placed
+    winnerText.textContent = `${winner} WINS!!`;//added text to p
+    winnerArea.classList.add('winnerArea');//gave new div a class
+    winnerText.classList.add('winner');//gave p a class
+    winnerArea.appendChild(winnerText);//added p to new div
+    gameArea.insertBefore(winnerArea, results);//added div to og gameArea
 
 }
 
