@@ -17,21 +17,38 @@ let playRound = (player, cpu) => {
     if(player === cpu){
         ties++;
         outcomeP.textContent = "";
-        outcomeP.textContent = `YOU TIED: both picked ${player}\r\n carlos`;
+        outcomeP.textContent = `YOU TIED: both picked ${player}\r\nYou: ${wins}\r\nCPU: ${losses}\r\nTie: ${ties}`;
         return `YOU TIED: both picked ${player}`;
     }
     else if((player == "ROCK" && cpu == "SCISSORS") || (player == "PAPER" && cpu == "ROCK") || (player == "SCISSORS" && cpu == "PAPER")){
         wins++;
         outcomeP.textContent = "";
-        outcomeP.textContent = `YOU WIN: ${player} beats ${cpu}\r\n playaplaya`;
+        outcomeP.textContent = `YOU WIN: ${player} beats ${cpu}\r\n You: ${wins}\r\nCPU: ${losses}\r\nTie: ${ties}`;
+        if(wins === 5) announceWinner("PLAYER");
         return `YOU WIN: ${player} beats ${cpu}`;
     }
     else{
         losses++;
         outcomeP.textContent = "";
-        outcomeP.textContent = `YOU LOSE: ${player} loses to ${cpu}\r\n badBunny`;
+        outcomeP.textContent = `YOU LOSE: ${player} loses to ${cpu}\r\n You: ${wins}\r\nCPU: ${losses}\r\nTie: ${ties}`;
+        if(losses === 5) announceWinner("CPU");
         return `YOU LOSE: ${player} loses to ${cpu}`;
     }
+}
+
+function announceWinner(winner){
+    const gameArea = document.querySelector('.gameArea');
+    const buttonArea = document.querySelector('.buttonArea');
+    const results = document.querySelector('.results');
+    gameArea.removeChild(buttonArea);
+    const winnerArea = document.createElement('div');
+    const winnerText = document.createElement('p');
+    winnerText.textContent = `${winner} WINS!!`;
+    winnerArea.classList.add('winnerArea');
+    winnerText.classList.add('winner');
+    winnerArea.appendChild(winnerText);
+    gameArea.insertBefore(winnerArea, results);
+
 }
 
 function determineWinner(tie, win, loss){
@@ -51,7 +68,6 @@ let losses = 0;
 let ties = 0;
 
 const outcomeP = document.querySelector('.outcome');
-const score = document.querySelector('.score');
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
